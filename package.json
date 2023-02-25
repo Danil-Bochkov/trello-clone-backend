@@ -1,6 +1,7 @@
 {
   "name": "trello-clone-backend",
   "version": "1.0.0",
+  "private": true,
   "scripts": {
     "test": "jest",
     "start": "cross-env NODE_ENV=production node ./server.js",
