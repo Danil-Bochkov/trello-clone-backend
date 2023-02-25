@@ -27,7 +27,7 @@ const addListSchema = Joi.object({
 
 const listSchemas = {
     addListSchema,
-    updateListSchema,
+    // updateListSchema,
 }
 
 const List = model('List', ListSchema);
