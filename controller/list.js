@@ -30,17 +30,17 @@ const createList = async (req, res) => {
   res.status(201).json(result)
 }
 
-const updateList = async (req, res, next) => {
-  const { listId } = req.params
-  const { title } = req.body
-  console.log("listId", listId);
-  console.log("Body", title);
-  const result = await List.findByIdAndUpdate(listId, {title: title}, {new: true});
-  if (!result) {
-    throw HttpError(404, 'Not Found')
-  }
-  res.json(result);
-}
+// const updateList = async (req, res, next) => {
+//   const { listId } = req.params
+//   const { title } = req.body
+//   console.log("listId", listId);
+//   console.log("Body", title);
+//   const result = await List.findByIdAndUpdate(listId, {title: title}, {new: true});
+//   if (!result) {
+//     throw HttpError(404, 'Not Found')
+//   }
+//   res.json(result);
+// }
 
 const removeList = async (req, res, next) => {
   const { listId } = req.params;
@@ -63,6 +63,6 @@ module.exports = {
     getList: ctrlWrapper(getList),
     getListById: ctrlWrapper(getListById),
     createList: ctrlWrapper(createList),
-    updateList: ctrlWrapper(updateList),
+    // updateList: ctrlWrapper(updateList),
     removeList: ctrlWrapper(removeList),
 }

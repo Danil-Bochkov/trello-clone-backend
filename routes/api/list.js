@@ -16,7 +16,7 @@ router.post('', validateBody(listSchemas.addListSchema), ctrlList.createList);
 
 // PATCH and PUT
 
-router.patch('/:listId', validateBody(listSchemas.updateListSchema), ctrlList.updateList);
+// router.patch('/:listId', validateBody(listSchemas.updateListSchema), ctrlList.updateList);
 
 // UPDATE
 

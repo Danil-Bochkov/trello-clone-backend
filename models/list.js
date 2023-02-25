@@ -21,9 +21,9 @@ const addListSchema = Joi.object({
     title: Joi.string().required()
 })
 
-const updateListSchema = Joi.object({
-    title: Joi.string().required()
-});
+// const updateListSchema = Joi.object({
+//     title: Joi.string().required()
+// });
 
 const listSchemas = {
     addListSchema,
