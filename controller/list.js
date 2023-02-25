@@ -32,9 +32,10 @@ const createList = async (req, res) => {
 
 const updateList = async (req, res, next) => {
   const { listId } = req.params
+  const { title } = req.body
   console.log("listId", listId);
-  console.log("Body", req.body);
-  const result = await List.findByIdAndUpdate( listId, req.body);
+  console.log("Body", title);
+  const result = await List.findByIdAndUpdate(listId, {title: title}, {new: true});
   if (!result) {
     throw HttpError(404, 'Not Found')
   }
@@ -48,7 +49,6 @@ const removeList = async (req, res, next) => {
   if (IsCardContains) {
     throw HttpError(404, 'You should clear list from cards before delete hole list.')
   }
-
 
   const result = await List.findByIdAndRemove(listId);
   

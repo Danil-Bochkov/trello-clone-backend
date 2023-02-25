@@ -45,7 +45,6 @@ const createCard = async (req, res) => {
 
 const updateCardInfo = async (req, res, next) => {
   const { cardId, title, description } = req.body
-    console.log(req.body);
     const result = await Card.findByIdAndUpdate(
       cardId,
       {title, description},
@@ -61,24 +60,18 @@ const updateCardInfo = async (req, res, next) => {
 const updateCard = async (req, res, next) => {
   const { cardId } = req.params;
   const { listId } = req.body;
-  console.log('ListId', listId);
-
 
   const draggedCard = await Card.findById(cardId);
   if (!draggedCard) {
     throw HttpError(404, 'Card not found');
   }
-  console.log("draggedCard", draggedCard);
 
   const updatedDraggedCard = await Card.findByIdAndUpdate(cardId, { listId: listId }, { new: true });
   if (!updatedDraggedCard) {
     throw HttpError(404, 'Updated card not found');
   }
-  console.log("UPDATEDdraggedCard", updatedDraggedCard);
 
-const getUpdatedDraggedCard = await Card.findById(updatedDraggedCard._id)
-
-  console.log('getUpdatedDraggedCard', getUpdatedDraggedCard);
+  const getUpdatedDraggedCard = await Card.findById(updatedDraggedCard._id)
   
   const oldList = await List.findByIdAndUpdate(draggedCard.listId, 
     { $pull: { cards: draggedCard._id } },
@@ -86,9 +79,7 @@ const getUpdatedDraggedCard = await Card.findById(updatedDraggedCard._id)
   );
   if (!oldList) {
     throw HttpError(404, 'Old list not found');
-  }
-  console.log("oldList", oldList)
-  
+  }  
 
   const updatedList = await List.findByIdAndUpdate(listId, {
     $push: { cards: getUpdatedDraggedCard }
@@ -96,7 +87,6 @@ const getUpdatedDraggedCard = await Card.findById(updatedDraggedCard._id)
   if (!updatedList) {
     throw HttpError(404, 'Updated list not found')
   }
-  console.log('updatedList', updatedList);
 
   const oldListCards = await Card.find({ listId: oldList._id })
   console.log('oldListCards', oldListCards);
